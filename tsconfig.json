@@ -15,6 +15,7 @@
     "moduleDetection": "force",
     "allowJs": true,
     "jsx": "react-jsx",
+    "skipLibCheck": true,
     "esModuleInterop": true,
     "paths": {
       "@/*": [
