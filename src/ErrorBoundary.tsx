@@ -10,13 +10,10 @@ interface State {
 }
 
 class ErrorBoundary extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      hasError: false,
-      error: null,
-    };
-  }
+  public state: State = {
+    hasError: false,
+    error: null,
+  };
 
   public static getDerivedStateFromError(error: Error): State {
     return { hasError: true, error };
@@ -29,18 +26,43 @@ class ErrorBoundary extends React.Component<Props, State> {
   public render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen flex items-center justify-center bg-slate-50 p-6">
-          <div className="max-w-md w-full bg-white rounded-3xl p-8 shadow-xl border border-slate-200">
-            <h1 className="text-2xl font-bold text-red-600 mb-4">エラーが発生しました</h1>
-            <p className="text-slate-600 mb-6">
+        <div style={{ 
+          minHeight: '100vh', 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center', 
+          backgroundColor: '#f8fafc',
+          padding: '24px',
+          fontFamily: 'sans-serif'
+        }}>
+          <div style={{ 
+            maxWidth: '400px', 
+            width: '100%', 
+            backgroundColor: 'white', 
+            borderRadius: '24px', 
+            padding: '32px', 
+            boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1)',
+            border: '1px solid #e2e8f0'
+          }}>
+            <h1 style={{ fontSize: '24px', fontWeight: 'bold', color: '#dc2626', marginBottom: '16px' }}>エラーが発生しました</h1>
+            <p style={{ color: '#475569', marginBottom: '24px' }}>
               アプリケーションの読み込み中に問題が発生しました。
             </p>
-            <div className="bg-slate-50 rounded-2xl p-4 mb-6 overflow-auto max-h-40">
-              <code className="text-xs text-red-500">{this.state.error?.message}</code>
+            <div style={{ backgroundColor: '#f8fafc', borderRadius: '16px', padding: '16px', marginBottom: '24px', overflow: 'auto', maxHeight: '160px' }}>
+              <code style={{ fontSize: '12px', color: '#ef4444' }}>{this.state.error?.message}</code>
             </div>
             <button
               onClick={() => window.location.reload()}
-              className="w-full py-3 bg-indigo-600 text-white rounded-2xl font-bold hover:bg-indigo-700 transition-colors"
+              style={{ 
+                width: '100%', 
+                padding: '12px', 
+                backgroundColor: '#4f46e5', 
+                color: 'white', 
+                borderRadius: '16px', 
+                fontWeight: 'bold', 
+                border: 'none',
+                cursor: 'pointer'
+              }}
             >
               再読み込み
             </button>
